@@ -1,8 +1,5 @@
 ---
 
-- name: Ensure Python's mysqldb module is available
-  apt: name=python-mysqldb state=installed
-
 - include: install.yml
 
 - include: daemon.yml
