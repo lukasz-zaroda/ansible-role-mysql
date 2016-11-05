@@ -1,0 +1,10 @@
+---
+- name: Ensure MySQL is installed by APT
+  apt: name={{item}} state=installed
+  with_items: "{{mysql_packages}}"
+  when: mysql_package_manager == 'apt'
+
+- name: Ensure MySQL is installed by YUM
+  yum: name={{item}} state=installed
+  with_items: "{{mysql_packages}}"
+  when: mysql_package_manager == 'yum'

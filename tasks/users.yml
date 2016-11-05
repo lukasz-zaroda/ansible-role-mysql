@@ -1,0 +1,29 @@
+---
+- name: "MySQL: Users status"
+  mysql_user: check_implicit_admin={{item.value.check_implicit_admin|default(omit)}}
+              config_file={{item.value.config_file|default(omit)}}
+              connect_timeout={{item.value.connect_timeout|default(omit)}}
+              login_host={{item.value.login_host|default(omit)}}
+              login_user=root
+              login_port={{item.value.login_port|default(omit)}}
+              login_unix_socket={{item.value.login_unix_socket|default(omit)}}
+              ssl_ca={{item.value.ssl_ca|default(omit)}}
+              ssl_cert={{item.value.ssl_cert|default(omit)}}
+              ssl_key={{item.value.ssl_key|default(omit)}}
+              append_privs={{item.value.append_privs|default(omit)}}
+              encrypted={{item.value.host|default(omit)}}
+              host={{item.value.host|default(omit)}}
+              host_all={{item.value.host_all|default(omit)}}
+              name={{item.key}}
+              password={{item.value.password|default(omit)}}
+              priv={{item.value.priv|default(omit)}}
+              sql_log_bin={{item.value.sql_log_bin|default(omit)}}
+              state={{item.value.state|default(omit)}}
+              update_password={{item.value.update_password|default(omit)}}
+  with_dict: "{{_mysql_users}}"
+  register: _mysql_users_result
+
+# If root has been updated, then check if password in .my.cnf file is up to date.
+- name: "Synchronize root credentials in the '.my.cnf' file."
+  template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+  when: _mysql_users.root is defined and (_mysql_users_result.changed)

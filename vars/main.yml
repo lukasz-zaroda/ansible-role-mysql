@@ -1,0 +1,4 @@
+---
+mysql_connection_core_defaults:
+  login_user: root
+  config_file: "~/.my.cnf"

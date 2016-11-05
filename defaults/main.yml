@@ -1,0 +1,71 @@
+---
+mysql_daemon: mysql
+mysql_config_path: /etc/mysql/conf.d
+mysql_daemon_manager: systemd # available values: systemd, service
+mysql_packages: [mysql-common, mysql-server]
+mysql_package_manager: apt # available values: apt, yum
+
+# Default dabase settings. A setting from here will be used if it is not on the list of the databases.
+mysql_databases_defaults:
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+# Default user settings. A setting from here will be used if it is not on the list of the users.
+mysql_users_defaults:
+  priv: "*.*:USAGE" # If user will not have specified any privilages, he will be stripped from existing ones.
+
+# Root is like user, just moved to the separate dictionary.
+mysql_root: {}
+
+# List of databases to create, with their settings.
+#
+# # Example:
+# mysql_databases:
+#   mydatabase:
+#     encoding: utf8mb4
+#     collation: utf8mb4_unicode_ci
+#
+# For possible options see: http://docs.ansible.com/ansible/mysql_db_module.html
+mysql_databases: {}
+
+
+# List of users to create, with their settings.
+#
+# # Example:
+# mysql_users:
+#   example_user:
+#      password: hunter2
+#
+# For possible options see: http://docs.ansible.com/ansible/mysql_user_module.html
+mysql_users: {}
+
+
+# The actual MySQL configuration.
+# First level of the dictionary describes group of options,
+# and second level describes options.
+#
+# # Example:
+# mysql_config:
+#   mysqld:
+#      key_buffer_size: "256M"
+#      max_allowed_packet: "64M"
+#
+# # Will turn into:
+# [mysqld]
+# key_buffer_size=256M
+# max_allowed_packet=64M
+mysql_config:
+  mysqld:
+    key_buffer_size: "256M"
+    max_allowed_packet: "64M"
+    table_open_cache: "256"
+    sort_buffer_size: "1M"
+    read_buffer_size: "1M"
+    read_rnd_buffer_size: "4M"
+    myisam_sort_buffer_size: "64M"
+    thread_cache_size: "8"
+    query_cache_limit: "1M"
+    query_cache_size: "16M"
+    max_connections: "150"
+    tmp_table_size: "16M"
+    max_heap_table_size: "16M"

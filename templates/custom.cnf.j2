@@ -1,0 +1,7 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "true"
+{% for group in mysql_config %}
+[{{ group }}]
+{%   for option in mysql_config[group] %}
+{{     option }} = {{ mysql_config[group][option] }}
+{%   endfor %}
+{% endfor %}

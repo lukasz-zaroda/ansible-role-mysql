@@ -1,0 +1,34 @@
+---
+
+- name: Ensure Python's mysqldb module is available
+  apt: name=python-mysqldb state=installed
+
+- include: install.yml
+
+- include: daemon.yml
+
+- include: users.yml
+  vars:
+    _mysql_users: "{{ { 'root': mysql_root } }}"
+
+- include: config.yml
+           _mysql_returned_config="mysql_databases_merged"
+           _mysql_config={{mysql_databases}}
+           _mysql_config_defaults={{mysql_databases_defaults}}
+           _mysql_connection_core_defaults={{mysql_connection_core_defaults}}
+- include: databases.yml
+  vars:
+    _mysql_databases: "{{mysql_databases_merged}}"
+
+- include: config.yml
+           _mysql_returned_config="mysql_users_merged"
+           _mysql_config={{mysql_users}}
+           _mysql_config_defaults={{mysql_users_defaults}}
+           _mysql_connection_core_defaults={{mysql_connection_core_defaults}}
+- include: users.yml
+  vars:
+    _mysql_users: "{{mysql_users_merged}}"
+
+- name: Set configuration
+  template: src=custom.cnf.j2 dest={{mysql_config_path}}/custom.cnf owner=root group=root mode=0664
+  notify: restart mysql

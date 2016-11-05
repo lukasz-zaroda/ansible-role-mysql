@@ -1,0 +1,14 @@
+---
+
+- name: "Config: Reset temporary dictionary."
+  set_fact:
+    _mysql_temp_config: {}
+
+- name: "Config: Merge configurations in the temporary dictionary."
+  set_fact:
+    {"_mysql_temp_config":"{{ _mysql_temp_config|default({}) | combine({item.key: _mysql_connection_core_defaults}, {item.key: _mysql_config_defaults}, {item.key: item.value}, recursive=True) }}"}
+  with_dict: "{{_mysql_config}}"
+
+- name: "Config: Save the content of the temporary dictionary in the variable of the given name."
+  set_fact:
+    {"{{ _mysql_returned_config }}":"{{_mysql_temp_config}}"}

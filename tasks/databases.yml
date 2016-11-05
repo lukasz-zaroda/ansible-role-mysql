@@ -1,0 +1,24 @@
+---
+- name: "MySQL: Database status."
+  mysql_db: collation={{item.value.collation|default(omit)}}
+            config_file={{item.value.config_file|default(omit)}}
+            connect_timeout={{item.value.connect_timeout|default(omit)}}
+            encoding={{item.value.encoding|default(omit)}}
+            login_host={{item.value.login_host|default(omit)}}
+            login_password={{item.value.login_password|default(omit)}}
+            login_port={{item.value.login_port|default(omit)}}
+            login_unix_socket={{item.value.login_unix|default(omit)}}
+            login_user={{item.value.login_user|default(omit)}}
+            name={{item.key}}
+            quick={{item.value.quick|default(omit)}}
+            single_transaction={{item.value.single_transaction|default(omit)}}
+            ssl_ca={{item.value.ssl_ca|default(omit)}}
+            ssl_cert={{item.value.ssl_cert|default(omit)}}
+            ssl_key={{item.value.ssl_key|default(omit)}}
+            state={{item.value.state|default(omit)}}
+            target={{item.value.target|default(omit)}}
+  with_dict: "{{_mysql_databases}}"
+
+- name: "Variables' cleanup after \"databases\" subroutine."
+  set_fact:
+    _mysql_databases: !!null

@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Łukasz Zaroda
+  company: Luken-Tech
+  description: "MySQL installation, configuration, and easy user/database management."
+  min_ansible_version: 2.2
+  license: MIT
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+
+dependencies: []
