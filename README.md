@@ -1,6 +1,6 @@
 Ansible role: MySQL
 ===================
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-mysql-000000.svg)](https://github.com/lukasz-zaroda/ansible-role-mysql)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-mysql-000000.svg)](https://galaxy.ansible.com/lukasz-zaroda/mysql/)
 
 MySQL installation, configuration, and easy user/database management.
 
