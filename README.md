@@ -86,7 +86,7 @@ made for Debian.
 mysql_daemon: mysql
 mysql_config_path: /etc/mysql/conf.d
 mysql_daemon_manager: systemd # available values: systemd, service
-mysql_packages: [mysql-common, mysql-server]
+mysql_packages: [mysql-common, mysql-server, python-mysqldb]
 mysql_package_manager: apt # available values: apt, yum
 ```
 
