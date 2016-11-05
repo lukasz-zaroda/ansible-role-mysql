@@ -97,7 +97,7 @@ None.
 Example Playbook
 ----------------
 
-```
+```yml
 ---
 - hosts: servers
   become: true
