@@ -1,5 +1,6 @@
-Ansible role: MySQL [![Ansible Galaxy](https://img.shields.io/badge/galaxy-mysql-000000.svg)](http://travis-ci.org/dev-sec/ansible-mysql-hardening)
+Ansible role: MySQL
 ===================
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-mysql-000000.svg)](https://github.com/lukasz-zaroda/ansible-role-mysql)
 
 MySQL installation, configuration, and easy user/database management.
 
