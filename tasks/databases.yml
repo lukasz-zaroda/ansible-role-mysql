@@ -18,7 +18,3 @@
             state={{item.value.state|default(omit)}}
             target={{item.value.target|default(omit)}}
   with_dict: "{{_mysql_databases}}"
-
-- name: "Variables' cleanup after \"databases\" subroutine."
-  set_fact:
-    _mysql_databases: !!null
