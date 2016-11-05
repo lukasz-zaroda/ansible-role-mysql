@@ -17,7 +17,8 @@ merged together creating final configurations. There are three main dictionaries
 - mysql_users
 - mysql_config
 
-For two first: the keys on the first level are users/databases names, the values are dictionaries of settings. Example:
+For first two: the keys on the first level are users/databases names, their values are dictionaries of settings.
+For example:
 
 ```yml
 mysql_databases:
@@ -31,9 +32,9 @@ mysql_users:
     password: hunter2
     priv: "mydatabase.*:ALL"
 ```
-In the above example "otherdatabase" has no settings set. When the setting is not set for database, or user,
-the default setting is being used, from the dictionaries `mysql_databases_defaults`/`mysql_users_defaults` ,
-looking like this:
+In the above example the "otherdatabase" has no settings set. When the setting is not set for a database, or user,
+the default values will be used. These default values will come from the dictionaries: `mysql_databases_defaults`/`mysql_users_defaults`.
+This is an example of the `mysql_users_defaults` dictionary:
 
 ```yml
 mysql_databases_defaults:
@@ -41,8 +42,8 @@ mysql_databases_defaults:
   collation: utf8mb4_unicode_ci
 ```
 
-^ This way all databases, that have no encoding and collation set, will get those defaults. Defaults for users works
-exactly the same.
+^ This way all databases, that have no encoding and collation set, will get these defaults. Defaults for users work
+exactly the same, but come from the `mysql_users_defaults` dictionary.
 
 You can see available settings here:
 http://docs.ansible.com/ansible/mysql_user_module.html
@@ -66,20 +67,20 @@ key_buffer_size=256M
 max_allowed_packet=64M
 ```
 
-There is also a dictionary with a settings for a root account: mysql_root, for example:
+There is also a dictionary with settings for a root account: mysql_root, for example:
 
 ```yml
 mysql_root:
   password: hunter2
 ```
 
-It works like user from the mysql_users table, but is separated, and is not influenced by the `mysql_users_defaults`
-dictionary. Also note that you don't have to store the root password in your playbook, after you will set it once,
-root credentials will be saved on the target system, and no longer will have to be referenced by the playbook, for it
-to work.
+It works like user from the mysql_users dictionary, but is separated, and is not filled with defaults from the
+`mysql_users_defaults`. Also note that you don't have to store the root password in your playbook, after you
+will set it once, root credentials will be saved on the target system, and no longer will have to be referenced by
+the playbook for it to work.
 
 There are also some other variables that should be tweaked for specific system you are deploying to. Defaults are
-made for Debian based systems.
+made for Debian.
 
 ```yml
 mysql_daemon: mysql
