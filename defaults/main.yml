@@ -3,7 +3,6 @@ mysql_daemon: mysql
 mysql_config_path: /etc/mysql/conf.d
 mysql_daemon_manager: systemd # available values: systemd, service
 mysql_packages: [mysql-common, mysql-server, python-mysqldb]
-mysql_package_manager: apt # available values: apt, yum
 
 # Default dabase settings. A setting from here will be used if it is not on the list of the databases.
 mysql_databases_defaults:
