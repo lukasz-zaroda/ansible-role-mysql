@@ -4,7 +4,10 @@
   package: name={{item}} state=installed
   with_items: "{{mysql_packages}}"
 
-- include: daemon.yml
+- name: "Make sure daemon is enabled"
+  systemd: name={{mysql_daemon}}
+           state=started
+           enabled=yes
 
 - include: users.yml
   vars:
